@@ -1,0 +1,81 @@
+
+body {
+  font-family: 'Fira Code', monospace;
+  background-color: #040404;
+  color: #fff;
+  position: relative;
+  /*background: transparent;*/
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  background: #040404;
+  background-size: cover;
+  left: ;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  z-index: -1;
+
+}
+/*nav*/
+
+/*footer*/
+#footer{
+  height: 20%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: cyan;
+  /*display: inline;*/
+  margin-bottom: 0px;
+  width: 100%;
+  color: black;
+
+}
+#footer h5{
+  color: black;
+}
+svg{
+  margin: 30px 30px 30px 30px;
+}
+
+/*end of footer*/
+
+.ctf{
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.chall1,.chall2,.chall3,.chall4{
+    border-top: 2px solid red;
+    margin-left: 125px;
+    margin-right: 125px;
+}
+.ctf h2{
+  color: cyan;
+  font-weight: bold;
+}
+
+.chall1 h3{
+  color: cyan;
+}
+.chall2 h3{
+  color: cyan;
+}
+.chall3 h3{
+  color: cyan;
+}
+.chall4 h3{
+  color: cyan;
+}
+.flag{
+  color: blue;
+  font-weight: bold;
+}
+
+span{
+  color: red;
+  font-weight: bold;
+}

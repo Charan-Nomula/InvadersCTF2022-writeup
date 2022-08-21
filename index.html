@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- styles -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Mj0ln1rs Blog</title>
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-lg sticky navbar-light" style="background-color:cyan;">
+    <a class="navbar-brand" href="https://ctftime.org/user/140646" target="_blank">Mj0ln1r</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://ctf.pwn.af/" target="_blank">CTF</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Challenges
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#chall1">NetKat</a>
+            <a class="dropdown-item" href="#chall2">Format Stings</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#chall3">Foodcourt Overflow</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#footer">Contact</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+      <br>
+      <div class="ctf" id="top">
+        <h2>Invaders CTF 2022</h2>
+        Capture The Flag event organized by the Team INVADERS.
+        <br><br>
+        <h4>Who are Invaders?</h4>
+        RGUKT Alumni, who got introduced to CTFs, played CTFs throughout engineering and got placed in top security research companies because of things learned through CTFs. More at @ INVADERS
+        <a href="https://ctftime.org/team/71588" target="_blank">Learnmore</a>
+        <br><br><h2>Mj0ln1r</h2>
+        I am a CTF player from RGUKTN, I solved all the pwn or binary exploitation challenges in InvadersCTF 2022.
+        <br><br>
+        Here is my writeups on those challenges..<br><br>
+
+      </div>
+
+
+      <!-- Challenge - 1 -->
+      <div class="chall1" id="chall1">
+        <br>
+        <h3>NetKat</h3>
+          <h5 style="color:red;">Task</h5>
+            Get the flag. 
+              nc 198.199.123.169 9000
+              <br><br>Provided Source Code<br><br>
+              <img src="img/netkat_src.png" ><br><br>
+          <h5 style="color:red;">Solution</h5>
+          <br>I have to connect to the remove server 198.199.123.169 on port 9000 to get the flag.<br><br>
+          <h6 style="color:green;">Tools Used</h5>
+            -> Netcat<br>
+           <!--  <a href="https://www.tecmint.com/install-netstat-in-linux/" target="_blank">->Click here to Install Netcat in Linux</a>
+            <br>
+ -->            I entered this command to get connect to the remote server.<br>
+             -> nc 198.199.123.169 9000<br><br>
+             <img src="img/nc_cmd.png" style="margin-left:125px;"><br>
+             When I press Enter i got the flag.<br>
+             Flag: <span class ="flag">InvaderCTF{Now_that_you_know_how_to_connect_to_remote_binary_solve_the_next_challenges}</span><br><br>
+      </div>
+       <!-- Challenge - 2 -->
+      <div class="chall2" id = "chall2">
+        <br>
+        <h3>Format Strings</h3>
+          <h5 style="color:red;">Task</h5>
+            Can you exploit echo file to get the FLAG.
+              nc 198.199.123.169 9003
+              <br><br>Provided echo.c file<br><br>
+              <img src="img/format.png"><br><br>
+              And they provided a binary executable file named "echo" to me.
+          <h5 style="color:red;">Solution</h5>
+          <br>1. First of all i reviewed the source code provided. And i observed there is Two character arrays are declared.
+          <br>2. I observed the size of the buffer array is "0x20" in decimal which is equals to "32"
+          <br>3. This means the program can read the input upto 32 characters only.
+          <br>4. I know that if i give a string which has the length of more than 32 as a input, then the "buffer overflow" will occur.
+          <br>5. A buffer overflow (or buffer overrun) occurs when the volume of data exceeds the storage capacity of the memory buffer. As a result, the program attempting to write the data to the buffer overwrites adjacent memory locations.
+          <br>6. So, that the program will gives a unintend output.
+          <br>7. I executed the "echo" file in the terminal and i entered a random input whoose length has more than 32.
+          <br><br><img src="img/echo.png" style="margin-left:125px;">
+          <br>8. I got the Dummy Flag from the program.
+          <br>9. So the attack was successful.
+          <br>10. The dummy flag says that , the original flag is on remote server.
+          <br>11. So, I connected to the remote server with the help of netcat.
+          <br>12. I entered this command to connect to the remote server.<br>
+             -> nc 198.199.123.169 9000<br>
+          <br><br>
+          <img src="img/nc_cmd.png" style="margin-left:125px;"><br>
+          <br>13. When I press Enter the echo program were executed.
+          <br>14. And i inputted same input which i gave in the "echo" program.
+          <br>As expected i got the original flag..<br><br>
+          <h6 style="color:green;">Tools Used</h5>
+            -> Netcat<br>
+             <br>
+             
+             Flag: <span class ="flag">InvaderCTF{EZy_PZy_format_strings}</span><br><br>
+      </div>
+       <!-- Challenge - 3 -->
+      <div class="chall3" id="chall3">
+        <br>
+        <h3>FoodCourt Overflow</h3>
+          <h5 style="color:red;">Task</h5>
+            Welcome to RGUKT Food Court!<br>We are giving free 200 RS wallet amount to our online customers.<br>
+            Sadly, you dont have enough money to buy the tasiest dish named Flag.<br>
+            Can you order the Flag?<br>
+            nc 198.199.123.169 9001
+              <br><br>Provided food-court-overflow.c file<br><br>
+              <img src="img/fc_src.png">
+              <br><img src="img/fc_src2.png">
+              <br><img src="img/fc_src3.png">
+              <br><br>
+          <h5 style="color:red;">Solution</h5>
+          <br>1. As the first step i reviewed the foodcourt.c source code provided by the team.
+          <br>2. The Main method is printing the menu and asking the user for the choice.
+          <br>3. Initially my <span>wallet = 200</span>.i.e balance.
+          <br>4. I am able to buy anything from the foodcourt except flag, cause it costs 1000.
+          <br>5. So, i analyzed the order function.
+          <br>6. In order function i have to enter number of items i want to buy,i.e <span>n</span>.
+          <br>7. The cost is going to be multiplied with the number of items.<span>cost = cost * n</span>
+          <br>8. Then if the cost is less than or equals to my balance then its going to place my order.
+              i.e <span>cost <= wallet</span>.
+          <br>9. Then my balance is going to be update. <span>wallet = wallet - cost</span>.
+          <br>10. Here i got one thought.
+          <br>11. I see noodles costs 50 and it substracts the total cost from the wallet.but what if the cost is negative?
+          <br>12. Then the cost is going to be added to the wallet, and if cost is negative enough, then we can get a huge wallet balance.
+          <br>13. How do we get a negative <span>cost</span>?.
+          <br>14. Notice the cost is multiplied with n. <span>cost = cost * n</span>.
+          <br>15. So, that if we make the <span>n</span> as negative the cost becomes negative.
+          <br>16. <span>n</span> is declared as integer , specially a signed integer.
+          <br>17. The signed integer has a range between <span>-2,147,483,648</span> to <span>2,147,483,647</span>.
+          <br>18. Signed integer use the first bit to store where it is negative or positive.
+          <br>19. 0 indicates positive and 1 indicating negative.
+          <br>20. What happens if i add 1 to 2,147,483,647 and store the result in signed integer?
+          <br>21. Well the first bit goes from 0 to 1 , meaning that the number is now negative!
+          <br>22. So, that i need to enter a large number as the number of noodles.This leads to <span>Integer Overflow</span>
+          <br>23. I entered this command to connect to the remote server.<br>
+             -> nc 198.199.123.169 9001
+             <br><br>
+             <img src="img/nc_cmd.png" style="margin-left:125px;"><br>
+             
+          <br>24. When I press Enter i got the food court overflow program.
+          <br>25. I choose option 1 to buy noodles.
+          <br>26. randomly entered a large number <span>4000000</span>.
+          <br>27. The <span>4000000</span> is not enough to make the cost negative.
+          <br>28. Again i choosed option 1 to buy noodles and this time i entered <span>40000000000</span>.
+          <br><br>
+          <img src="img/flag1.png" style="margin-left:125px;"><br>
+
+          <br>29. This time the number is large enough.
+          <br>30. Now the cost is <span>-1454759936</span>.
+          <br>31. Which is less than my wallet balance so that the order placed.
+          <br>32. The remaining wallet balance is <span>1454760136</span>.
+          <br>33. Because the <span>wallet = wallet - cost</span>here <span>wallet = 200 - (-1454759936) ==> wallet = 200 + 1454759936</span>.
+          <br>34. Now i have enough amount to buy a flag.
+          <br><br>
+          <img src="img/flag2.png" style="margin-left:125px;"><br>
+          <br>35. Now i choosed the option 4 to buy a flag.
+          <br>36. And i need one flag , so that the number of flags are 1.
+          <br>37. Then i got the flag.
+          <br>38. Thats My aproach to this challenge.
+          <br><br>
+
+          <h6 style="color:green;">Tools Used</h5>
+            -> Netcat<br><br>
+             Flag: <span class ="flag">InvaderCTF{Enjoy_the_fine_F1aG_d1sh_01212124}</span><br><br>
+      </div>
+      <!-- Challenge - 4 -->
+      <div class="chall4" id = "chall4">
+        <br>
+        <h3>PHP-Trivial</h3>
+        This challenge is from the WEB category.
+        <br>
+          <h5 style="color:red;">Task</h5>
+            Can you exploit the PHP code for the flag.
+              <span>http://ctf.pwn.af:8092/</span>
+              <br>The content present in the given link<br>
+              <br><img src="img/php.png"><br><br><br>
+          <h5 style="color:red;">Solution</h5>
+          <br>1. First of all i decided to run this code in the my localhost.
+          <br>2. I added the dummy flag values in the code as below.<br>
+          <br><img src="img/dummy.png" style="margin-left:125px;"><br>
+          <br>3. Then i saved it as .php file and placed it in the xampp server to run locally.
+          <br><br><img src="img/xampp.png" style="margin-left:125px;"><br>
+          <br>4. Then i started the xampp server.
+          <br><br><img src="img/xampprun.png" style="margin-left:125px;"><br>
+          <br>5. Then i opened my browser and directed to <span>localhost/php/phptrivial.php</span>.
+          <br><br><img src="img/browser.png" style="margin-left:125px;"><br>
+          <br>6. Now i observed there are some loose and strict comparisons in the php code.
+          <br>7. I have to bypass those comparisions in order to get the flag parts.
+          <br>8. Then i quicky searched for the php loosely comparison tricks.
+          <br>9. In <a href="https://devansh.xyz/ctfs/2021/09/11/php-tricks.html" target ="_blank" >this</a> site i got some useful information about the comparisons in php.
+          <br><br><img src="img/loose.png" style="margin-left:125px;"><br>
+          <br><img src="img/strict.png" style="margin-left:125px;"><br>
+          <br>10. To get the first part of the flag the strict comparison should be <span>false</span> and the 
+                  loose comparision should be <span>true</span>.
+          <br>11. I choosed the two values of the <span>a & b</span> from the above tables.
+
+          <br>12. Then i passed those values to through the url as <span>http://localhost/php/phptrivial.php?a=1&b=1e0</span>.<br>
+             -> <span>1 === 1e0 </span> is false and <span>1 == 1e0</span> is true.
+          <br>13. By this values i got the first part of the flag.
+           <br><br><img src="img/firstflag.png" style="margin-left:125px;"><br>
+          <br>14. Then for the second part of the flag i need to pass values of <span>c and d</span>
+          <br>15. In the second part the <span> == </span> comparision should be false and <span>===</span> comparison should be true.
+          <br>16. Here the md5 hash of the two values is being checked.So that i have to pass the the different values which have the same md5 hash.
+          <br>17. It is not possible for two non-equal entities to have same md5 hash, also it is to be noted that there is a strict comparison (===) not a loose one. 
+          <br>18. The values (c and d) are being entered through GET request parameter , and hence we can control the value as well as the type of the variable.
+          <br>19. If we send variables (c and d) of type array then we can bypass the md5 check , as that md5 check will only be executed if the type of the variables (c and d) is string.
+          <br>20. Remember strict comparison checks for both type and value, and if the type doesnt matches then it will simply ignore the condition and we will get our flag.
+          <br>21. Then the exploit to get our second flag is <span>http://localhost/php/phptrivial.php?a=1&b=1&c[]=1&d[]=2</span>
+          <br>--> Here <span>c and d</span> has the different values but same type which is array.
+          <br><br><img src="img/secondflag.png" style="margin-left:125px;"><br>
+          <br>22. Then for the third part of the flag i have to pass the diffent values with same hash again.
+          <br>23. And there are some sequence of characters are there those hash is also being checked in the strict comparison.
+          <br>24. But the same characters <span>[( and )]</span> are present in the both the operands so that we can ignore those characters hash.
+          <br>25. I use the same exploit which is used to find the second part of the flag.
+          <br>26. The exploit to get the complete flag is <span>http://localhost/php/phptrivial.php?a=1&b=1&c[]=1&d[]=2&e[]=1&f[]=2</span>
+          <br><br><img src="img/finalflag.png" style="margin-left:125px;"><br>
+          <br>27. Then i used the same exploit to get the original flag from the <span>http://ctf.pwn.af:8092/</span>.
+          <br>The Exploit is <span>http://ctf.pwn.af:8092/?a=1&b=1e0&c[]=1&d[]=2&e[]=1&f[]=2</span>
+          <br>As expected i got the original flag..<br><br>
+          <h6 style="color:green;">Tools Used</h5>
+            -> Xampp<br>
+            -> sublime<br>
+             <br>
+             
+             Flag: <span class ="flag">InvaderCTF{pHp_i5_g00d_bu7_n0t_th3_b3st!!}</span><br><br>
+      </div>
+      <p align="right" style="margin-right:30px;"><a href="#top">Go to Top </a></p>
+    <!-- footer -->
+    <div id="footer">
+      <br>
+        <h5>Developed by Mj0ln1r</h5>
+        <h6><i>Contact me..</i></h6>
+       <a href="https://github.com/Charan-Nomula" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="bi bi-github" viewBox="0 0 16 16">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        </svg></a>
+       
+        <a href="https://www.linkedin.com/in/charan-nomula-81a180186/" target="_blank">
+         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="bi bi-linkedin" viewBox="0 0 16 16">
+        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+      </svg>
+    </a>
+
+    <a href="https://www.instagram.com/charanu23.03/" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"  class="bi bi-instagram" viewBox="0 0 16 16">
+      <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+</svg></a>
+    </div>
+
+    <!-- end of footer -->
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
